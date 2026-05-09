@@ -706,6 +706,10 @@ func TestNewQemuHypervisorConfig(t *testing.T) {
 		t.Errorf("Expected value for BlockDeviceAIO  %v, got %v", blockDeviceAIO, config.BlockDeviceAIO)
 	}
 
+	if config.VirtioFSInodeFileHandles != vc.VirtioFSInodeFileHandlesPrefer {
+		t.Errorf("Expected value for VirtioFSInodeFileHandles %v, got %v", vc.VirtioFSInodeFileHandlesPrefer, config.VirtioFSInodeFileHandles)
+	}
+
 }
 
 func TestValidateBlockDeviceSectorSize(t *testing.T) {
@@ -1296,6 +1300,23 @@ func TestDefaultVirtioFSCache(t *testing.T) {
 	h.VirtioFSCache = "never"
 	cache = h.defaultVirtioFSCache()
 	assert.Equal("never", cache)
+}
+
+func TestDefaultVirtioFSInodeFileHandles(t *testing.T) {
+	assert := assert.New(t)
+
+	h := hypervisor{VirtioFSInodeFileHandles: ""}
+
+	mode := h.defaultVirtioFSInodeFileHandles()
+	assert.Equal(vc.VirtioFSInodeFileHandlesPrefer, mode)
+
+	h.VirtioFSInodeFileHandles = "mandatory"
+	mode = h.defaultVirtioFSInodeFileHandles()
+	assert.Equal("mandatory", mode)
+
+	h.VirtioFSInodeFileHandles = "never"
+	mode = h.defaultVirtioFSInodeFileHandles()
+	assert.Equal("never", mode)
 }
 
 func TestDefaultFirmware(t *testing.T) {

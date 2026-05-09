@@ -266,6 +266,9 @@ pub const KATA_ANNO_CFG_HYPERVISOR_VIRTIO_FS_DAEMON: &str =
 /// A sandbox annotation to specify the cache mode for fs version cache.
 pub const KATA_ANNO_CFG_HYPERVISOR_VIRTIO_FS_CACHE: &str =
     "io.katacontainers.config.hypervisor.virtio_fs_cache";
+/// A sandbox annotation to specify the inode file handles mode for virtiofsd.
+pub const KATA_ANNO_CFG_HYPERVISOR_VIRTIO_FS_INODE_FILE_HANDLES: &str =
+    "io.katacontainers.config.hypervisor.virtio_fs_inode_file_handles";
 /// A sandbox annotation to specify the DAX cache size in MiB.
 pub const KATA_ANNO_CFG_HYPERVISOR_VIRTIO_FS_CACHE_SIZE: &str =
     "io.katacontainers.config.hypervisor.virtio_fs_cache_size";
@@ -973,6 +976,9 @@ impl Annotation {
 
                     KATA_ANNO_CFG_HYPERVISOR_VIRTIO_FS_CACHE => {
                         hv.shared_fs.virtio_fs_cache = value.to_string();
+                    }
+                    KATA_ANNO_CFG_HYPERVISOR_VIRTIO_FS_INODE_FILE_HANDLES => {
+                        hv.shared_fs.virtio_fs_inode_file_handles = value.to_string();
                     }
                     KATA_ANNO_CFG_HYPERVISOR_VIRTIO_FS_CACHE_SIZE => {
                         match self.get_value::<u32>(key) {

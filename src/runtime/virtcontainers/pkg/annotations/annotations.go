@@ -204,6 +204,9 @@ const (
 	// VirtioFSCache is a sandbox annotation to specify the cache mode for fs version cache
 	VirtioFSCache = kataAnnotHypervisorPrefix + "virtio_fs_cache"
 
+	// VirtioFSInodeFileHandles is a sandbox annotation to specify the inode file handles mode for virtiofsd
+	VirtioFSInodeFileHandles = kataAnnotHypervisorPrefix + "virtio_fs_inode_file_handles"
+
 	// VirtioFSCacheSize is a sandbox annotation to specify the DAX cache size in MiB
 	VirtioFSCacheSize = kataAnnotHypervisorPrefix + "virtio_fs_cache_size"
 
